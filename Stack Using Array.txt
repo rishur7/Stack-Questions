@@ -1,0 +1,60 @@
+package Stack;
+
+public class ArrayStack {
+static int max=1000;
+int top;
+int ar[]=new int[max];
+void Stack()
+{
+top=-1;
+}
+boolean push(int x)
+{
+if(top>=max)
+{
+System.out.println("Stack Overflow");
+return false;
+}
+else
+{
+ar[++top]=x;
+System.out.println(x+" is in the stack now");
+return true;
+}
+}
+int pop()
+{
+	if(top<0)
+	{
+	System.out.println("Stack Underflow");
+	return 0;
+	}
+	else
+	{
+	int x=ar[top--];
+	return x;
+	}
+}
+int peek()
+{
+	if(top<0)
+	{
+	System.out.println("Stack Underflow");
+	return 0;
+	}
+	else
+	{
+	int x=ar[top];
+	return x;
+	}
+}
+
+	public static void main(String[] args) {
+		ArrayStack s=new ArrayStack();
+s.push(5);
+s.push(6);
+System.out.println("Popped element is "+s.pop()); // last in first out
+System.out.println("top is "+s.peek());
+	}
+
+}
