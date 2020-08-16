@@ -1,0 +1,99 @@
+package Stack;
+public class InfixToPostfix {
+	   private Stack stack;
+	   private String input;
+	   private String output = "";
+	   public InfixToPostfix(String in) {
+	      input = in;
+	      int x = input.length();
+	      stack = new Stack(x);
+	   }
+	   public String Transform() {
+	      for (int j = 0; j < input.length(); j++) {
+	         char ch = input.charAt(j);
+	         switch (ch) {
+	            case '+': 
+	            case '-':
+	               gotOper(ch, 1); 
+	               break; 
+	            case '*': 
+	            case '/':
+	               gotOper(ch, 2); 
+	               break; 
+	            case '(': 
+	               stack.push(ch);
+	               break;
+	            case ')': 
+	               gotParen(ch); 
+	               break;
+	            default: 
+	               output = output + ch; 
+	               break;
+	         }
+	      }
+	      while (!stack.isEmpty()) {
+	         output = output + stack.pop();
+	      }
+	      System.out.println(output);
+	      return output; 
+	   }
+	   public void gotOper(char ch, int prec1) {
+	      while (!stack.isEmpty()) {
+	         char eleTop = stack.pop();
+	         if (eleTop == '(') {
+	            stack.push(eleTop);
+	            break;
+	         } else {
+	            int prec2;
+	            if (eleTop=='+'||eleTop=='-')
+	            prec2 = 1;
+	            else
+	            prec2 = 2;
+	            if (prec2 < prec1) { 
+	               stack.push(eleTop);
+	               break;
+	            } 
+	            else output = output + eleTop;
+	         }
+	      }
+	      stack.push(ch);
+	   }
+	   public void gotParen(char ch) { 
+	      while (!stack.isEmpty()) {
+	         char chx = stack.pop();
+	         if (chx == '(') 
+	         break; 
+	         else output = output + chx; 
+	      }
+	   }
+	   public static void main(String[] args){
+	      String input = "a+b*c(+*)+d";
+	      String output;
+	      InfixToPostfix obj= new InfixToPostfix(input);
+	      output = obj.Transform(); 
+	      System.out.println("Postfix is " + output + '\n');
+	   }
+	   class Stack {
+	      private int maxSize;
+	      private char[] stackArray;
+	      private int top;
+	      
+	      public Stack(int max) {
+	         maxSize = max;
+	         stackArray = new char[maxSize];
+	         top = -1;
+	      }
+	      public void push(char j) {
+	         stackArray[++top] = j;
+	      }
+	      public char pop() {
+	         return stackArray[top--];
+	      }
+	      public char peek() {
+	         return stackArray[top];
+	      }
+	      public boolean isEmpty() {
+	         return (top == -1);
+	      }
+	   }
+	}
