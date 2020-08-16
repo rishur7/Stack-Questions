@@ -71,7 +71,7 @@ public class InfixToPostfix {
 	      String output;
 	      InfixToPostfix obj= new InfixToPostfix(input);
 	      output = obj.Transform(); 
-	      System.out.println("Postfix is " + output + '\n');
+	      System.out.println("Postfix is " + output);
 	   }
 	   class Stack {
 	      private int maxSize;
