@@ -1,0 +1,63 @@
+package Questions;
+import java.util.*;
+public class BalancingBrackets {
+
+	public static void main(String[] args) {
+		Scanner sc= new Scanner(System.in);
+		String str=sc.nextLine();
+		Stack<Character> s = new Stack<>();
+		boolean isBalanced=true;
+		for(int i=0;i<str.length();i++)
+		{
+			char ch=str.charAt(i);
+			if(ch=='(' || ch=='[' || ch=='{')
+			{
+			s.push(ch);
+			continue;
+			}
+			if(s.isEmpty())
+			{
+			isBalanced=false;
+			break;
+		    } 
+			if(ch==')')
+			{
+			if(s.peek()=='(')
+				s.pop();
+			else
+			{
+				isBalanced=false;
+			    break;
+			}
+		    }
+			if(ch==']')
+			{
+			if(s.peek()=='[')
+				s.pop();
+			else
+			{
+				isBalanced=false;
+			    break;
+			}
+		    }
+			if(ch=='}')
+			{
+			if(s.peek()=='{')
+				s.pop();
+			else
+			{
+				isBalanced=false;
+			    break;
+			}
+		    }
+		    }
+		if(!(s.isEmpty()))
+		isBalanced=false;
+		
+		if(isBalanced)
+		System.out.println("String is balanced");
+		else
+		System.out.println("String is not balanced");
+sc.close();
+	}
+}
